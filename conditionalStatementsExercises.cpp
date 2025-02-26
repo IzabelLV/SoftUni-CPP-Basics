@@ -21,8 +21,7 @@ void sumSeconds()
     //std::cout << minutes << ':' << (seconds < 10 ? "0" : "") << seconds;
 }
 
-
-int main()
+void bonusScore()
 {
     int digit;
     std::cin >> digit;
@@ -33,27 +32,30 @@ int main()
     {
         score = 5;
     }
-    else if (digit > 100)
-    {
-        score = 0.1 * digit;
-    }
-    else if (digit > 1000)
+    else if (digit <= 1000)
     {
         score = 0.2 * digit;
+    }
+    else
+    {
+        score += 0.1 * digit;
     }
 
     if (digit % 2 == 0)
     {
-        score = 1;
+        score += 1;
     }
-
-    if (digit % 10 == 5)
+    else if (digit % 10 == 5)
     {
-        score = 2;
+        score += 2;
     }
 
-    std::cout << score << '\n' << (static_cast<double>(digit) + score) << std::endl;
+    std::cout << score << '\n' << digit + score << std::endl;
+}
 
+
+int main()
+{
     
     return 0;
 }
