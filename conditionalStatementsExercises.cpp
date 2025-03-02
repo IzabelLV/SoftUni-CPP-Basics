@@ -232,10 +232,3 @@ void lunchBreak()
         std::cout << "You don't have enough time to watch " << movie << ", you need " << ceil(length - restOfTime) << " more minutes." << std::endl;
     }
 }
-
-int main()
-{
-    
-
-    return 0;
-}
