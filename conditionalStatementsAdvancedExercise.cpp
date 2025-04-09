@@ -83,9 +83,8 @@ void summerOutfit()
     std::cout << "It's " << celsius << " degrees, get your " << outfit << " and " << shoes << ".\n";
 }
 
-int main() 
+void newHouse()
 {
-    
     const int rosesPrice = 5;
     const double daliaPrice = 3.80;
     const double lalePrice = 2.80;
@@ -94,24 +93,23 @@ int main()
     
     std::string type;
     int budget, quantity;
-    std::cin >> type >> budget >> quantity;
+    std::cin >> type >> quantity >> budget;
     double discount = 0.0;
     
-    double price;
     
+    double price = 0.0;
     if (type == "Roses")
     {
-        price = rosesPrice;
+        price = rosesPrice * quantity;
         if (quantity > 80)
         {
             discount = price * 0.1;
             price -= discount;
-            std::cout << price << std::endl;
         }
     }
     else if (type == "Dahlias")
     {
-        price = daliaPrice;
+        price = daliaPrice * quantity;
         if (quantity > 90)
         {
             discount = price * 0.15;
@@ -120,7 +118,7 @@ int main()
     }
     else if (type == "Tulips")
     {
-        price = lalePrice;
+        price = lalePrice * quantity;
         if (quantity > 80)
         {
             discount = price * 0.15;
@@ -129,7 +127,7 @@ int main()
     }
     else if (type == "Narcissus")
     {
-        price = narcisPrice;
+        price = narcisPrice * quantity;
         if (quantity < 120)
         {
             discount = price * 0.15;
@@ -138,7 +136,7 @@ int main()
     }
     else if (type == "Gladiolus")
     {
-        price = gladiolaPrice;
+        price = gladiolaPrice * quantity;
         if (quantity < 80)
         {
             discount = price * 0.2;
@@ -148,12 +146,250 @@ int main()
     
     if (budget >= price)
     {
-        std::cout << "Hey, you have a great garden with " << quantity << ' ' << type << " and " << budget - price << " leva left.\n";
+        std::cout << "Hey, you have a great garden with " << quantity << ' ' << type << " and " << std::fixed << std::setprecision(2) << (budget - price) << " leva left.\n";
     }
     else
     {
-        std::cout << "Not enough money, you need " << price - budget << " leva more.\n";
+        std::cout << "Not enough money, you need " << std::fixed << std::setprecision(2) << (price- budget) << " leva more.\n";
     }
+}
+
+void fishingBoat()
+{
+    int springRent = 3000;
+    int summerAutumnRent = 4200;
+    int winterRent = 2600;
+    
+    // <= 6 - 0.1
+    // > 7 && <= 11 - 0.15
+    // > 12 - 0.25
+    
+    // if % 2 == 0 - 0.5 if autumn != discount
+    
+    std::string season;
+    int budget, fishers;
+    
+    std::cin >> budget >> season >> fishers;
+    
+    double price = 0.0;
+    double discount = 0.0;
+    
+    if (season == "Spring")
+    {
+        price = springRent;
+        if (fishers <= 6)
+        {
+            discount = price * 0.1;
+            price -= discount;
+        }
+        else if (fishers > 7 && fishers <= 11)
+        {
+            discount = price * 0.15;
+            price -= discount;
+        }
+        else if (fishers > 12)
+        {
+            discount = price * 0.25;
+            price -= discount;
+        }
+    }
+    else if (season == "Summer")
+    {
+        price = summerAutumnRent;
+        if (fishers <= 6)
+        {
+            discount = price * 0.1;
+            price -= discount;
+        }
+        else if (fishers > 7 && fishers <= 11)
+        {
+            discount = price * 0.15;
+            price -= discount;
+        }
+        else if (fishers > 12)
+        {
+            discount = price * 0.25;
+            price -= discount;
+        }
+    }
+    else if (season == "Autumn")
+    {
+        price = summerAutumnRent;
+        if (fishers <= 6)
+        {
+            discount = price * 0.1;
+            price -= discount;
+        }
+        else if (fishers > 7 && fishers <= 11)
+        {
+            discount = price * 0.15;
+            price -= discount;
+        }
+        else if (fishers > 12)
+        {
+            discount = price * 0.25;
+            price -= discount;
+        }
+    }
+    else if (season == "Winter")
+    {
+        price = winterRent;
+        if (fishers <= 6)
+        {
+            discount = price * 0.1;
+            price -= discount;
+        }
+        else if (fishers > 7 && fishers <= 11)
+        {
+            discount = price * 0.15;
+            price -= discount;
+        }
+        else if (fishers > 12)
+        {
+            discount = price * 0.25;
+            price -= discount;
+        }
+    }
+    
+    if (fishers % 2 == 0 && season != "Autumn")
+    {
+        price = price - 0.05 * price;
+    }
+    
+    if (budget >= price)
+    {
+        std::cout << "Yes! You have " << std::fixed << std::setprecision(2) << (budget - price) << " leva left.\n";
+    }
+    else
+    {
+        std::cout << "Not enough money! You need " << std::fixed << std::setprecision(2) << (price - budget) << " leva.\n";
+    }
+}
+
+void journey()
+{
+    double budget;
+    std::string season;
+    std::cin >> budget >> season;
+
+    double price = 0.0;
+    std::string vacation;
+    std::string type;
+    if (budget <= 100)
+    {
+        vacation = "Bulgaria";
+        if (season == "summer")
+        {
+            price = budget * 0.7;
+            type = "Camp";
+        }
+        else if (season == "winter")
+        {
+            price = budget * 0.3;
+            type = "Hotel";
+        }
+    }
+    else if (budget > 100 && budget <= 1000)
+    {
+        vacation = "Balkans";
+        if (season == "summer")
+        {
+            price = budget * 0.6;
+            type = "Camp";
+        }
+        else if (season == "winter")
+        {
+            price = budget * 0.2;
+            type = "Hotel";
+        }
+    }
+    else
+    {
+        vacation = "Europe";
+        price = budget * 0.1;
+        type = "Hotel";
+    }
+
+    std::cout << "Somewhere in " << vacation << std::endl;
+    std::cout << type << " - " << std::fixed << std::setprecision(2) << (budget - price);
+}
+
+void operatorsBetweenNumbers()
+{
+    int n1, n2;
+    char symbol;
+    std::cin >> n1 >> n2 >> symbol;
+
+    switch(symbol)
+    {
+        case '+':
+        {
+            int sum = n1 + n2;
+            if (sum % 2 == 0)
+            {
+                std::cout << n1 << ' ' << symbol << ' ' << n2 << " = " << sum << " - " << "even\n";
+            }
+            else
+            {
+                std::cout << n1 << ' ' << symbol << ' ' << n2 << " = " << sum << " - " << "odd\n";
+            }
+            break;
+        }
+        case '-':
+        {
+            int sum = n1 - n2;
+            if (sum % 2 == 0)
+            {
+                std::cout << n1 << ' ' << symbol << ' ' << n2 << " = " << sum << " - " << "even\n";
+            }
+            else
+            {
+                std::cout << n1 << ' ' << symbol << ' ' << n2 << " = " << sum << " - " << "odd\n";
+            }
+            break;
+        }
+        case '*':
+        {
+            int sum = n1 * n2;
+            if (sum % 2 == 0)
+            {
+                std::cout << n1 << ' ' << symbol << ' ' << n2 << " = " << sum << " - " << "even\n";
+            }
+            else
+            {
+                std::cout << n1 << ' ' << symbol << ' ' << n2 << " = " << sum << " - " << "odd\n";
+            }
+            break;
+        }
+        case '/':
+        {
+            if (n2 == 0)
+            {
+                std::cout << "Cannot divide " << n1 << " by zero\n";
+            }
+            else
+            {
+                std::cout << n1 << ' ' << symbol << ' ' << n2 << " = " << std::fixed << std::setprecision(2) << static_cast<double>(n1) / n2;
+            }
+            break;
+        }
+        case '%':
+        {
+            if (n2 == 0)
+            {
+                std::cout << "Cannot divide " << n1 << " by zero\n";
+            }
+            else
+            {
+                std::cout << n1 << ' ' << symbol << ' ' << n2 << " = " << static_cast<double>(n1 % n2);
+            }
+            break;
+        }
+    }
+}
+
+int main() 
+{
     
     return 0;
 }
